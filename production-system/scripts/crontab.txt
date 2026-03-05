@@ -1,0 +1,3 @@
+# production-system 定时任务
+# 每日凌晨 3 点执行 PostgreSQL 自动备份（任务19）
+0 3 * * * /usr/bin/env bash -lc 'cd /workspace/linux/production-system && ./scripts/backup.py >> /var/log/production_backup_cron.log 2>&1'
