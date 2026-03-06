@@ -16,6 +16,22 @@ services:
     networks:
       - production-net
 
+
+  postgres_decisions:
+    image: postgres:15
+    container_name: production-postgres-decisions
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DECISION_POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: decisions
+    ports:
+      - "5433:5432"
+    volumes:
+      - ../data/decisions:/var/lib/postgresql/data
+    networks:
+      - production-net
+
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: production-pgadmin

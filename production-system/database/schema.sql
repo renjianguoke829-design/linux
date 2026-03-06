@@ -105,3 +105,20 @@ CREATE TABLE IF NOT EXISTS personal_productions (
     quality_score INTEGER CHECK (quality_score BETWEEN 1 AND 10),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS expression_knowledge (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    content TEXT,
+    source TEXT,
+    tier INTEGER CHECK (tier IN (1, 2, 3)),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS sessions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    pipeline_type TEXT,
+    status TEXT,
+    current_stage INTEGER CHECK (current_stage BETWEEN 1 AND 5),
+    started_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMP
+);
